@@ -33,6 +33,16 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        Route::bind('city', function ($value, $route) {
+
+            $stateId = (int) $route->parameter('state');
+            $cityId = (int) $value;
+
+            return \App\City::where('state_id', $stateId)
+                ->where('id',$cityId)
+                ->firstOrFail();
+        });
     }
 
     /**
