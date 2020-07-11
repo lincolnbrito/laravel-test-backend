@@ -37,7 +37,18 @@ services:
       - mysql
     links:
       - mysql
- 
+  
+  # Vue App
+  app:
+    image: ambientum/node:12
+    container_name: test-app
+    command: npm run serve
+    volumes:
+      - ./app:/var/www/app
+    ports:
+      - "8080:8080"
+      - "3000:3000"
+
   # Laravel Queue Worker
   queue:
     image: ambientum/php:7.2
