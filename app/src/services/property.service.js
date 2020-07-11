@@ -9,15 +9,6 @@ class PropertyService extends ApiService {
     return this.client.get();
   }
 
-  store (username) {
-    return this.client.post('', {
-      username: username
-    })
-  }
-
-  topics (repositoryId) {
-    return this.client.get(`topics/${repositoryId}`)
-  }
 }
 
 export default new PropertyService()

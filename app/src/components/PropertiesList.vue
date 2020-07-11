@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table v-if="properties.length>0" class="table striped mb-4 text-md">
+        <table class="table striped mb-4 text-md">
             <thead>
                 <tr>
                     <th>Email</th>
@@ -22,9 +22,7 @@
                 </tr>
             </tbody>
         </table>
-        <div v-else>
-            <div class="text-center">Sem propriedades cadastradas</div>
-        </div>
+       
     </div>
 </template>
 
