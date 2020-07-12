@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 class Property extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, SoftCascadeTrait;
 
     protected $with = ['state:id,name','city:id,name','contract'];
 
@@ -18,6 +19,8 @@ class Property extends Model
     protected $dates = ['deleted_at'];
 
     protected $appends = ['hired'];
+
+    protected $softCascade = ['contract'];
 
     public function getHiredAttribute(){
         return $this->contract()->exists();
