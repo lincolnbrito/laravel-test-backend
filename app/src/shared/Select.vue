@@ -1,8 +1,13 @@
 <template>
     <div class="relative">
         <select v-model="model" :disabled="loading" class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-            <option :value="-1" v-if="loading" disabled>Carregando...</option>
-            <option :value="-1" v-else disabled>{{empty}}</option>
+            <option :value="-1" disabled v-if="loading">
+                Carregando...
+            </option>
+            <option :value="-1" disabled v-else>
+                {{empty}}
+            </option>
+            
             <option 
                 v-for="option in options" 
                 :value="option.value" 

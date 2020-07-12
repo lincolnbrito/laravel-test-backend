@@ -48,16 +48,17 @@ table.striped tbody tr:nth-child(even) {
     @apply bg-green-500 text-white
 }
 .svg-icon {
-    width: 1.5em;
-    height: 1.5em;
+    width: 1em;
+    height: 1em;
+    display: inline;
 }
 .svg-icon path,
 .svg-icon polygon,
 .svg-icon rect {
-    fill: #4691f6;
+    fill: #FFFFFF;
 }
 .svg-icon circle {
-    stroke: #4691f6;
+    stroke: #FFFFFF;
     stroke-width: 2;
 }
 
@@ -86,7 +87,7 @@ table.striped tbody tr:nth-child(even) {
 }
 
 .modal .modal-title{
-    @apply px-3 py-2 border-b font-bold text-gray-600 
+    @apply px-3 uppercase py-2 border-b font-bold text-gray-600 
 }
 
 .modal .modal-body{
