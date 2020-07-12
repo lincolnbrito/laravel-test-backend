@@ -26,7 +26,7 @@ class ContractStoreRequest extends FormRequest
     {
         return [
             'hirer_type' => 'required',
-            'hirer_document' => 'required',
+            'hirer_document' => 'required|regex:/^([0-9]*)$/',
             'hirer_email' => 'required|email',
             'hirer_name' => 'required',
             'property_id' => 'required|unique:contracts|exists:properties,id'
