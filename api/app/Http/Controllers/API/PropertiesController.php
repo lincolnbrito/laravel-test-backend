@@ -8,6 +8,7 @@ use App\Http\Requests\PropertyUpdateRequest;
 use App\Http\Resources\Property as Resource;
 use App\Property;
 use Illuminate\Http\Request;
+use App\Jobs\SendEmail;
 
 class PropertiesController extends Controller
 {
@@ -46,6 +47,9 @@ class PropertiesController extends Controller
         try {
             $property = Property::create($request->all());
             $property->load('city:id,name','state:id,name');
+
+            $details = ['email' => $property->email];
+            SendEmail::dispatch($details);
 
             return response()->json([
                 'data' => $property
