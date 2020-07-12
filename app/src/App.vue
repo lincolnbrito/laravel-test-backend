@@ -27,7 +27,7 @@
     </div>
 
     <modal-property :showing="creatingProperty" @close="creatingProperty=false" @save="onSaveProperty"></modal-property>
-    <modal-contract :showing="creatingContract" @close="creatingContract=false" @save="onSaveProperty"></modal-contract>
+    <modal-contract :showing="creatingContract" @close="creatingContract=false" @save="onSaveContract"></modal-contract>
   </div>
 </template>
 
@@ -70,9 +70,13 @@ export default {
         .catch(error => {
           alert('Erro ao apagar o imóvel. Tenta novamente mais tarde.')
           console.log(error)
-      })
-      
-    }
+      })    
+    },
+    onSaveContract(contract) {
+      console.log('CONTRATO SALVO, agora atualiza a lista de propriedas', contract);
+      let index = this.properties.findIndex( item => item.id === contract.property_id);
+      this.properties[index].hired = true;
+    },
   },  
   components: {
     'properties-list': PropertiesList,

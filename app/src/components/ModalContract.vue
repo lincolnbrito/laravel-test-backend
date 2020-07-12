@@ -2,7 +2,12 @@
     <modal :showing="showing" @close="close">
         <div class="modal-title">Cadastrar Contrato</div>
         <div class="modal-body">
-            <form class="px-2 pt-2 pb-2 mb-4">
+            
+            <div v-if="!valid" class="bg-gray-200 p-4 text-gray-600 rounded text-center">
+                Não existem imóveis disponíveis para contratação.
+            </div>
+            
+            <form v-else class="px-2 pt-2 pb-2 mb-4">
                 <div class="mb-4">
                     <label for="" class="label">Imóvel</label>
                     <select-property 
@@ -10,7 +15,7 @@
                         :options="properties"
                         :loading="loadingProperties"
                         v-model="contract.property_id"
-                    />
+                    />                  
                 </div>
 
                 <div class="flex flex-wrap -mx-3 mb-2">
@@ -46,7 +51,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a @click.prevent.stop="save" href="#" class="btn btn-primary">Salvar</a>
+            <button @click.prevent.stop="save" href="#" class="btn btn-primary" :disabled="!valid">Salvar</button>
             <a @click.prevent.stop="close" href="#" class="btn btn-default">Cancelar</a>
         </div>
     </modal>
@@ -86,7 +91,7 @@ export default {
         },
         save (e) {
             contractService.store(this.contract)
-                .then((response) => {
+                .then((response) => {                    
                     this.$emit('close')
                     this.$emit('save', response.data.data)
                 })
@@ -98,7 +103,7 @@ export default {
         },
         loadProperties() {
             this.loadingProperties = true;            
-            propertyService.list()
+            propertyService.listUnhired()
                 .then((response) => {
                     this.loadingProperties = false;
                     this.properties = response.data.data.map(makeOptions)
@@ -109,11 +114,12 @@ export default {
                 })
         },
     },
-    
-    components: {
-        'modal': Modal,
-        'select-property': Select,
+    computed: {
+        valid () {
+            return this.properties.length > 0;
+        }
     },
+
     watch: {
         showing (value) {
             this.contract = {
@@ -129,7 +135,12 @@ export default {
                 this.loadProperties();
             }
         }
-    }
+    },
+    components: {
+        'modal': Modal,
+        'select-property': Select,
+    },
+    
 }
 
 function makeOptions(item) {

@@ -9,6 +9,10 @@ class PropertyService extends ApiService {
     return this.client.get();
   }
 
+  listUnhired() {
+    return this.client.get('unhired');
+  }
+
   store(data) {
     return this.client.post('', data);
   }

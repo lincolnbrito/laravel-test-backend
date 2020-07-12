@@ -24,6 +24,18 @@ class PropertiesController extends Controller
     }
 
     /**
+     * Display a listing of unhired properties
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unhired()
+    {
+        $properties = Property::doesntHave('contract')->get();
+
+        return Resource::collection($properties);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  App\Http\Requests\PropertyStoreRequest $request
