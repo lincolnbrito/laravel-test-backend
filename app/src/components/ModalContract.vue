@@ -35,7 +35,7 @@
                         <label class="label" for="grid-password">
                             Documento
                         </label>
-                        <input v-model="contract.hirer_document" class="form-control" type="text">
+                        <input v-model="contract.hirer_document" v-mask="documentMask" class="form-control" type="text">
                     </div>
                 </div>
 
@@ -117,6 +117,9 @@ export default {
     computed: {
         valid () {
             return this.properties.length > 0;
+        },
+        documentMask() {
+            return this.contract.hirer_type == 'F' ? '###.###.###-##' : '##.###.###/####-##'
         }
     },
 
