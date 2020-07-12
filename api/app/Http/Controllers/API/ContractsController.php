@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Contract;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PropertyStoreRequest;
-use App\Http\Requests\PropertyUpdateRequest;
-use App\Http\Resources\Property as Resource;
-use App\Property;
+use App\Http\Requests\ContractStoreRequest;
+use App\Http\Resources\Contract as Resource;
 use Illuminate\Http\Request;
 
-class PropertiesController extends Controller
+class ContractsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,25 +17,24 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        $properties = Property::all();
+        $contracts = Contract::all();
 
-        return Resource::collection($properties);
+        return Resource::collection($contracts);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\PropertyStoreRequest $request
+     * @param  App\Http\Requests\ContractStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PropertyStoreRequest $request)
+    public function store(ContractStoreRequest $request)
     {
         try {
-            $property = Property::create($request->all());
-            $property->load('city:id,name','state:id,name');
+            $contract = Contract::create($request->all());
 
             return response()->json([
-                'data' => $property
+                'data' => $contract
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
@@ -48,33 +46,33 @@ class PropertiesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Property  $property
+     * @param  \App\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function show(Property $property)
+    public function show(Contract $contract)
     {
-        return Resource::make($property);
+        return Resource::make($contract);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  App\Http\Requests\PropertyUpdateRequest  $request
-     * @param  \App\Property  $property
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function update(PropertyUpdateRequest $request, Property $property)
+    public function update(Request $request, Contract $contract)
     {
-       //
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Property  $property
+     * @param  \App\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Property $property)
+    public function destroy(Contract $contract)
     {
         $deleted = $property->delete();
 

@@ -16,5 +16,6 @@ Route::namespace('API')->name('api.')->group(function(){
     Route::apiResource('states', 'StatesController')->only(['index','show']);
     Route::apiResource('states.cities', 'CitiesController')->only(['index','show']);
 
-    Route::apiResource('properties', 'PropertiesController');
+    Route::apiResource('properties', 'PropertiesController')->except(['update']);
+    Route::apiResource('contracts', 'ContractsController')->except(['update']);;
 });
