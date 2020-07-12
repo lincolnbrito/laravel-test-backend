@@ -14,7 +14,11 @@
                     <td>{{property.email}}</td>
                     <td>{{property.street}}, {{property.number}}, {{property.city.name}}, {{property.state.name}}</td>
                     <td width="10%">
-                        <span class="badge badge-default">????</span>
+                        <span class="badge" 
+                            :class="{'badge-success':property.hired, 'badge-default': !property.hired}">
+                            <template v-if="property.hired">Contratado</template>
+                            <template v-else>Não contratado</template>
+                        </span>
                     </td>
                     <td width="5%">
                         <a title="Apagar" href="#" @click="remove(property)">
