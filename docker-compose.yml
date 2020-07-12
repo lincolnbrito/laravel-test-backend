@@ -72,7 +72,18 @@ services:
       - mysql
       - redis
     networks:
-      - backend   
+      - backend 
+  
+  # Laravel Queue Worker
+  composer:
+    image: ambientum/php:7.2
+    container_name: test-composer
+    volumes:
+      - ./api:/var/www/app
+    command:
+      - composer    
+    networks:
+      - backend 
  
 # Named volumes
 volumes:
