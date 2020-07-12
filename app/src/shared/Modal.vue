@@ -29,10 +29,10 @@ export default {
   watch: {
     showing (value) {
       if (value) {
-        return document.querySelector('body').classList.add('overflow-hidden')
+        //return document.querySelector('body').classList.add('overflow-hidden')
       }
 
-      document.querySelector('body').classList.remove('overflow-hidden')
+      //document.querySelector('body').classList.remove('overflow-hidden')
     }
   }
 }

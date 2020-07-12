@@ -96,3 +96,7 @@ table.striped tbody tr:nth-child(even) {
 .modal .modal-footer{
     @apply px-3 py-2 mt-2 border-t flex flex-row content-end
 }
+
+.alert {
+    @apply w-full bg-gray-200 p-10 text-2xl text-gray-600
+}

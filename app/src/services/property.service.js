@@ -12,6 +12,12 @@ class PropertyService extends ApiService {
   store(data) {
     return this.client.post('', data);
   }
+
+  destroy(id) {
+    return this.client.delete(`${id}`);
+  }
+
+  
 }
 
 export default new PropertyService()

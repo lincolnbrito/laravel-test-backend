@@ -65,7 +65,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a @click.prevent.stop="save" class="btn btn-primary">Salvar</a>
+            <a @click.prevent.stop="save" href="#" class="btn btn-primary">Salvar</a>
             <a @click.prevent.stop="close" href="#" class="btn btn-default">Cancelar</a>
         </div>
     </modal>
@@ -107,11 +107,13 @@ export default {
         },
         save (e) {
             propertyService.store(this.property)
-                .then(() => {
-                    this.close()
+                .then((response) => {
+                    this.$emit('close')
+                    this.$emit('save', response.data.data)
                 })
                 .catch( error => {
-                    console.log('ERRRP', error)
+                    alert('Erro ao cadastrar o imóvel. Tente novamente mais tarde.')
+                    console.log(error)
                 })
              e.preventDefault();
         },
@@ -122,6 +124,10 @@ export default {
                     this.loadingStates = false;
                     this.states = response.data.data.map(makeOptions)
                 })
+                .catch( error => {
+                    alert('Erro ao carregar a lista de estados. Tente novamente mais tarde.')
+                    console.log(error)
+                })
         },
         loadCities() {
            this.loadingCities = true;
@@ -130,6 +136,10 @@ export default {
                 .then((response) => {
                     this.loadingCities = false;
                     this.cities = response.data.data.map(makeOptions)
+                })
+                .catch( error => {
+                    alert('Erro ao carregar a lista de cidades. Tente novamente mais tarde.')
+                    console.log(error)
                 })
         }
     },
