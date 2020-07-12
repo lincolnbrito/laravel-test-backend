@@ -18,7 +18,7 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        $properties = Property::paginate();
+        $properties = Property::all();
 
         return Resource::collection($properties);
     }
@@ -33,6 +33,7 @@ class PropertiesController extends Controller
     {
         try {
             $property = Property::create($request->all());
+            $property->load('city:id,name','state:id,name');
 
             return response()->json([
                 'data' => $property
