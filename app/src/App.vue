@@ -73,7 +73,6 @@ export default {
       })    
     },
     onSaveContract(contract) {
-      console.log('CONTRATO SALVO, agora atualiza a lista de propriedas', contract);
       let index = this.properties.findIndex( item => item.id === contract.property_id);
       this.properties[index].hired = true;
     },

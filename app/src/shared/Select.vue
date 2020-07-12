@@ -24,6 +24,12 @@
 
 <script>
 export default {
+    $_veeValidate: {
+        // fetch the current value from the innerValue defined in the component data.
+        value () {
+        return this.value;
+        }
+    },
     props: {
         value:{
             required: false
@@ -45,8 +51,12 @@ export default {
             },
             set(val){
                 this.$emit('input', val)
+                this.$emit('change', val)
             }
         }
     }, 
+    created () {
+      this.$validator = this.$parent.$validator
+    }
 }
 </script>
